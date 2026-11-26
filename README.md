@@ -17,3 +17,10 @@ An end-to-end machine learning workflow for **cardio-metabolic clinical risk str
 ## Quickstart
 ```bash
 python src/health_risk_pipeline.py
+
+## Experiment Visualizations
+
+* **ROC-AUC vs. PR-AUC:** ![Model Ranking Performance](reports/figures/1_roc_vs_pr_auc.png)
+* **Probability Calibration:** ![Probability Reliability](reports/figures/2_calibration_metrics.png)
+* **Best F1 & Thresholds:** ![Best F1 Score and Threshold](reports/figures/3_best_f1_and_thresholds.png)
+* **High-Recall Screening:** ![High-Recall Screening Operating Points](reports/figures/4_high_recall_screening.png)
