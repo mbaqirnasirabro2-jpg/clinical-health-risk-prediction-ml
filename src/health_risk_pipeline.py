@@ -160,3 +160,21 @@ plt.savefig("visuals/shap_health_drivers.png", dpi=300)
 plt.close()
 
 print("[SUCCESS] Generated clinical telemetry data, OOF predictions, and 3 visuals in visuals/!")
+
+python - << 'EOF'
+import pandas as pd
+from sklearn.metrics import accuracy_score, f1_score, log_loss, roc_auc_score
+
+oof = pd.read_csv("data/health_risk_oof_predictions.csv")
+print("Columns:", list(oof.columns))
+
+y_true = oof["high_risk_flag"].values
+prob_col = [c for c in oof.columns if c != "high_risk_flag" and "id" not in c.lower()][0]
+y_prob = oof[prob_col].values
+y_pred_050 = (y_prob >= 0.50).astype(int)
+
+print(f"ROC-AUC : {roc_auc_score(y_true, y_prob):.4f}")
+print(f"LogLoss : {log_loss(y_true, y_prob):.4f}")
+print(f"F1 (@0.5): {f1_score(y_true, y_pred_050):.4f}")
+print(f"Accuracy: {accuracy_score(y_true, y_pred_050):.4f}")
+EOF
